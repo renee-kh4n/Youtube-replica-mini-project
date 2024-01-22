@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<!-- 8:55- 9:55 suggested vids in aside bar -->
+<!-- 01182024 8:55- 9:55 suggested vids in aside bar -->
+<!-- 01222024 2:30 - 11:00 main body (in progress: comments, section-2, fonts) -->
 
 <html>
     <head>
         <title>Youtube Page Replica</title>
         <style>
-            body{
+            html, body{
                 background-color: black;
+                color: white;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                margin: 0px 5%;
             }
             header{
                 display: flex;
@@ -40,11 +46,22 @@
                 border-top-left-radius: 100px ;
                 border-bottom-left-radius: 100px;
             }
-            .searchbar > input[type="submit"]{
-                width: 40px;
+            .searchbar > div > input[type="submit"]{
+                width: 100%;
                 border: none;
                 background-color: #3f3f3f;
-                background-image: url("");
+            }
+            .searchbar > div{
+                width: 45px;
+                display: flex;
+                flex-direction: row;
+            }
+
+            .search-icon{
+                width: 20px;
+                height: 20px;
+                margin-left: -30px;
+                margin-top: 10px;
             }
             .mic{
                 vertical-align: middle;
@@ -53,26 +70,33 @@
                 border-radius: 100%;
                 margin-left: 5px;
                 padding: 10px;
-                filter: invert(100%);
             }
             .profile-controls{
                 display: flex;
                 flex-direction: row;
+                justify-content: space-around;
+                gap: 5px;
+                align-items: center;
 
             }
             .icon:first-of-type{
-                filter: invert(100%);
+                height: 30px;
             }
-            .icon:second-of-type{
-                filter: brightness(100%);
-            }
-            .icon{
-                height: 35px;
+            .icon:nth-child(2){
+                height: 40px;
             }
             .icon:last-of-type{
-                height: 40px;
+                height: 35px;
                 border-radius: 100%;
-                border: solid 1px #3f3f3f;
+                border: solid 2px whitesmoke;
+            }
+            .main-content{ 
+                display: flex;
+                flex-direction: row;
+            }
+            aside{
+                float: right;
+                width: 30%;
             }
             .sidebar{
                 display: flex;
@@ -80,14 +104,14 @@
                 gap: 10px;
                 list-style-type: none;
                 margin: 0;
-                margin-top: -250px;
                 padding: 0;
             }
             .suggestion>img{
                 width: 200px;
+                border-radius: 15px;
             }
             .vid-title{
-                font-size: 15px;
+                font-size: 18px;
                 font-weight: bold;
                 padding-left: 5px;
                 overflow: hidden;
@@ -98,18 +122,147 @@
                 
             }
             .youtuber, .views-date{
-                font-size: 10px;
+                font-size: 15px;
                 padding-left: 5px;
+                margin-top: -10px;
+
             }
             .suggested-vid{
                 display: flex;
                 flex-direction: row;
+                align-items: center;
             }
-            aside{
-                float: right;
-                width: 30%;
+
+            a{
+                text-decoration: none;
+            }
+
+            /* unvisited link and visited link*/
+            a:link, a:visited {
+            color: white;
+            }
+            /* mouse over link */
+            a:hover {
+            color: grey;
+            }
+
+            .right{
+                /* border: solid 1px white; */
+                width: 70%;
+                height: 100%;
+            }
+            
+            .right > section{
+                /* border: solid 1px aqua; */
+                margin: 0px 10px; /* top-bottom left-right */
+                height: min-content;
+            }
+
+            iframe{
+                width: 900px;
+                height: 500px;
+                border-radius: 15px;
+            }
+
+            #level-2, #level-3, .comments{
+                width: 880px;
+
+            }
+
+            #level-2{
+                width: 900px;
+            }
+
+            #level-2, #section-1, #section-2{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 10px;
+                align-items: center;
+
+            }
+            #youtuber-infor{
+                display: flex;
+                flex-direction: column;
+            }
+            .main-youtuber-icon{
+                border-radius: 100%;
+            }
+
+            .button, .rate{
+                background-color: #3f3f3f;
                 color: white;
+                border-radius: 100px;
+                border: none;
             }
+
+            .button:first-of-type{
+                padding: 15px;
+            }
+
+            #level-3{
+                padding: 10px;
+                border-radius: 15px;
+                border:solid 1px #3f3f3f;
+                background-color: #3f3f3f;
+            }
+
+            .button > img{
+                height: 30px;
+            }
+
+            .comments{
+                padding: 0;
+                margin: 0;
+                list-style-type: none;
+            }
+
+            .search-icon, .mic, .icon:first-of-type, .icon:nth-child(2), .button>img, #like, #dislike{
+                filter: invert(100%);
+            }
+
+            .share{
+                width: 100px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+            }
+
+            .share > span{
+                margin-left: -20px;
+            }
+
+            .rate{
+                width: 150px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                vertical-align: middle;
+            }
+
+            #like, #dislike{
+                height: 25px;
+            }
+            #dislike{
+                rotate: 180deg;
+            }
+
+            select, .main-youtuber-icon, .button, .rate{
+                height: 50px;
+            }
+
+            select{
+                background-color: #3f3f3f;
+                border-radius: 100px;
+
+            }
+
+           
+
+
+
 
             
 
@@ -128,99 +281,184 @@
             <div class="header-search">
                 <div class="searchbar">
                         
-                    <input type="search" placeholder="Search. . ."/>
-                    <input type="submit" value="" class="search-img"/>
-
+                    <input type="search" placeholder="Search. . .">
+                    <div>
+                        <input type="submit" value="" class="search-img">
+                        <img class="search-icon" src="https://openclipart.org/image/2400px/svg_to_png/213239/Search-icon.png"/>    
+                    </div>
+                   
                 </div>
                 <img class="mic" src="https://webstockreview.net/images/microphone-clipart-svg-5.png">
             </div>
 
             <div class="profile-controls">
                 <img class="icon" src="https://icon-library.com/images/movie-png-icon/movie-png-icon-0.jpg">
-                <img class="icon" src="https://icons.veryicon.com/png/256/business/menu-icon/notifications-4.png">
+                <img class="icon" src="https://icons.veryicon.com/png/o/miscellaneous/fine-fillet-icon/notification-bell.png">
                 <img class="icon" src="https://64.media.tumblr.com/821f1a7cf8af5ea6ce73271d5965a794/0c806963e6b54cef-4a/s640x960/5d2467aa3b480548fff5c4c58b44903710b548f6.jpg">
             </div>
         </header>
     
-    <div class="right">
-        <section >
-            <iframe src="https://www.youtube.com/embed/uq3HrjFyqcg?si=mTForZfm0FC14Uta" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            <!-- <video width="320" height="180" controls="true">
-                <source src="https://drive.google.com/file/d/1YJ_dEhSI6veQgXkvkZ6EMtcHiiXzxYLl/view?usp=sharing" type="video/mp4">
-            Your browser does not support the video tag.
-            </video> -->
-        </section>
+    <div class="main-content">
+        <div class="right">
+            <section >
+                <iframe src="https://www.youtube.com/embed/uq3HrjFyqcg?si=mTForZfm0FC14Uta" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              
+                <div class="video-info">
+                    <div id="level-1">
+                        <p class="main-title"> New Beginnings | Moving, Thrifting, Furniture Shopping | Seoul Vlog</p>
+                    </div>
 
-        <article>
-            <ol class="comments">
-                <li>Comment 1</li>
-                <li>Comment 2</li>
-                <li>Comment 3</li>
-                <li>Comment 4</li>
-                <li>Comment 5</li>
+                    <div id="level-2">
+                        
+                       
+                        <section id="section-1">
+                            <img class="main-youtuber-icon" src="https://yt3.ggpht.com/dm5Aq93xvVJz0NoVO88ieBkDXmuShCujGPlZ7qETMEPTrXvPUCFI3-BB6Xs_P-r6Uk3mnBy9zA=s88-c-k-c0x00ffffff-no-rj"/>
+                        
+                            <div id="youtuber-info">
+                                <p class="youtuber-name">Doobydobap</p>
+                                <p class="subscribers"> 3.74M subscribers</p>
+                            </div>
+
+                            
+                            <input class="button" type="button" value="Subscribe" >
+
+                        </section>
+                        
+                        <section id="section-2">
+                            <div class="rate">
+                                <div>
+                                    <img id="like" src="https://clipground.com/images/like-button-png-5.png"><span id="like-num"> 13K </span>|
+                                </div>
+                                <img id="dislike" src="https://clipground.com/images/like-button-png-5.png">
+                            </div>
+    
+                            <div class="button share">
+                                <img src="https://cdn.onlinewebfonts.com/svg/img_335000.png"/>
+                                <span>Share</span>
+                            </div>
+                           
+                            <select class="options">
+                                <option default>...</option>
+                                <option value="Download">Download</option>
+                                <option value="Thanks">Thanks</option>
+                                <option value="Clip">Clip</option>
+                                <option value="Save">Save</option>
+                                <option value="Report">Report</option>
+                            </select>
+                        </section>
+                        
+                        
+
+                    </div>
+
+                    <div id="level-3">
+                        <div class="main-views-date">
+                            341K views  2 years ago
+                        </div>
+
+                        <div class="main-desc">
+                            <pre>
+Korean subtitles are now available!! Click on the CC button to see :)
+Goodies are available at doobymart.com 
+Order them now to get it before Christmas!!! 
+
+Instagram @doobydobap  
+Join my discord! 😈
+www.doobydobap.com for recipes & stories
+                            </pre>
+                        </div>
+                    </div>
+
+                </div>
+                
+            </section>
+    
+            <article>
+                <ol class="comments">
+                    <li>Absolutely loved the Seoul vlog! Your new beginnings seem so exciting, and I can't wait to see how you decorate your new space. The thrift store finds were amazing! 🌟</li>
+                    <li>Moving looks exhausting, but you made it so entertaining!</li>
+                    <li>Your new beginnings vlog was like a breath of fresh air! I enjoyed every moment of your moving adventure and the excitement of exploring thrift stores. Your taste in furniture is impeccable. Can't wait for more Seoul vlogs from your new chapter!</li>
+                    <li>Thrifting goals achieved! Your haul is amazing.</li>
+                    <li>Seoul just got a whole lot more stylish! Loving your new beginnings.</li>
+                </ol>
+            </article>
+    
+        </div>
+            <aside>
+                <!-- Sidebar where videos are -->
+            <ol class="sidebar">
+                <li >
+                    <a class="suggested-vid" href="https://youtu.be/fwtTpjNXXHk?feature=shared">
+                        <div class="suggestion">
+                            <img src="https://i.ytimg.com/vi/fwtTpjNXXHk/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAVIO-oIiPvi0U-49DMN_0GWgYYVQ" />
+                        </div>
+                        <div class="suggestion">
+                            <p class="vid-title"> Home tour | My cozy anime style home tour </p>
+                            <p class="youtuber">Little Ingredient </p>
+                            <p class ="views-date"> 4.2K views  1 month ago </p> 
+                        </div>
+                    </a>
+                    
+                </li>
+                <li>
+                    <a class="suggested-vid" href="https://youtu.be/4qt6rvHssv4?feature=shared">
+                        <div class="suggestion">
+                            <img src="https://i.ytimg.com/vi/4qt6rvHssv4/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBT2S8OBNH9oUcHXk0H-7CKKVqTWA" />
+                        </div>
+                        <div class="suggestion">
+                            <p class="vid-title"> Waking up at 5 am, my diligent routine / Cook with me </p>
+                            <p class="youtuber">꿀주부 Honeyjubu </p>
+                            <p class ="views-date"> 438K views  2 weeks ago </p> 
+                        </div>
+                    </a>
+                    
+                    
+                </li>
+                <li >
+                    <a class="suggested-vid" href="https://youtu.be/i3SktcOL4ko?feature=shared">
+                        <div class="suggestion">
+                            <img src="https://i.ytimg.com/vi/i3SktcOL4ko/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLA4wAp0JgDZUM9nYhIWykQl8lolXQ" />
+                        </div>
+                        <div class="suggestion">
+                            <p class="vid-title"> Japanese Soufflé Pancakes Recipe | スフレパンケーキの作り方 | Emojoie Cuisine </p>
+                            <p class="youtuber">Emojoie</p>
+                            <p class ="views-date"> 7.5M views  3 years ago </p> 
+                        </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="suggested-vid" href="https://youtu.be/e4GGv5JrKRY?feature=shared">
+                        <div class="suggestion">
+                            <img src="https://i.ytimg.com/vi/e4GGv5JrKRY/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAuczUfgYZBfqdl31lpgqeAna7udw" />
+                        </div>
+                        <div class="suggestion">
+                            <p class="vid-title"> A tour of my ART STUDIO and SUPPLIES 🎨 new desk makeover with Fezibo</p>
+                            <p class="youtuber"> Ashleigh King </p>
+                            <p class ="views-date">  45K views  1 year ago </p> 
+                        </div>
+
+                    </a>
+                    
+                    
+                </li>
+                <li>
+                    <a class="suggested-vid" href="https://youtu.be/BFt-KFCp628?feature=shared">
+                        <div class="suggestion">
+                            <img src="https://i.ytimg.com/vi/BFt-KFCp628/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLA32OFtNtpZhjjRlPVV606nE6x5Pw" />
+                        </div>
+                        <div class="suggestion">
+                            <p class="vid-title"> Cooking Korean food for American visiting my houseㅣGranola makingㅣNew house updateㅣHami's graduation </p>
+                            <p class="youtuber">하미마미 Hamimommy </p>
+                            <p class ="views-date"> 408K views  2 weeks ago  </p> 
+                        </div>
+                    </a>
+                </li>
             </ol>
-        </article>
+            </aside>
 
     </div>
-        <aside>Sidebar where videos are
-        <ol class="sidebar">
-            <li class="suggested-vid">
-                <div class="suggestion">
-                    <img src="https://i.ytimg.com/vi/fwtTpjNXXHk/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAVIO-oIiPvi0U-49DMN_0GWgYYVQ" />
-                </div>
-                <div class="suggestion">
-                    <p class="vid-title"> Home tour | My cozy anime style home tour </p>
-                    <p class="youtuber">Little Ingredient </p>
-                    <p class ="views-date"> 4.2K views  1 month ago </p> 
-                </div>
-                
-            </li>
-            <li class="suggested-vid">
-                <div class="suggestion">
-                    <img src="https://i.ytimg.com/vi/4qt6rvHssv4/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBT2S8OBNH9oUcHXk0H-7CKKVqTWA" />
-                </div>
-                <div class="suggestion">
-                    <p class="vid-title"> Waking up at 5 am, my diligent routine / Cook with me </p>
-                    <p class="youtuber">꿀주부 Honeyjubu </p>
-                    <p class ="views-date"> 438K views  2 weeks ago </p> 
-                </div>
-                
-            </li>
-            <li class="suggested-vid">
-                <div class="suggestion">
-                    <img src="https://i.ytimg.com/vi/i3SktcOL4ko/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLA4wAp0JgDZUM9nYhIWykQl8lolXQ" />
-                </div>
-                <div class="suggestion">
-                    <p class="vid-title"> Japanese Soufflé Pancakes Recipe | スフレパンケーキの作り方 | Emojoie Cuisine </p>
-                    <p class="youtuber">Emojoie</p>
-                    <p class ="views-date"> 7.5M views  3 years ago </p> 
-                </div>
-                
-            </li>
-            <li class="suggested-vid">
-                <div class="suggestion">
-                    <img src="https://i.ytimg.com/vi/e4GGv5JrKRY/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAuczUfgYZBfqdl31lpgqeAna7udw" />
-                </div>
-                <div class="suggestion">
-                    <p class="vid-title"> A tour of my ART STUDIO and SUPPLIES 🎨 new desk makeover with Fezibo</p>
-                    <p class="youtuber"> Ashleigh King </p>
-                    <p class ="views-date">  45K views  1 year ago </p> 
-                </div>
-                
-            </li>
-            <li class="suggested-vid">
-                <div class="suggestion">
-                    <img src="https://i.ytimg.com/vi/BFt-KFCp628/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLA32OFtNtpZhjjRlPVV606nE6x5Pw" />
-                </div>
-                <div class="suggestion">
-                    <p class="vid-title"> Cooking Korean food for American visiting my houseㅣGranola makingㅣNew house updateㅣHami's graduation </p>
-                    <p class="youtuber">하미마미 Hamimommy </p>
-                    <p class ="views-date"> 408K views  2 weeks ago  </p> 
-                </div>
-                
-            </li>
-        </ol>
-        </aside>
+    
 
         <footer>Copyright</footer>
     </body>
