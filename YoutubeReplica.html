@@ -8,18 +8,98 @@
             body{
                 background-color: black;
             }
-            ol{
+            header{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+            }
+            header > span > img{
+                height: 80px;
+            }
+            .header-search{
+                display: flex;
+                flex-direction: row;
+                height: 40px;
+                vertical-align: middle;
+                width: 60%;
+            }
+            .searchbar{
+                display: flex;
+                flex-direction: row;
+                background-color: white;
+                border: solid 1px #3f3f3f;
+                border-radius: 100px;
+                overflow: hidden;
+                width: 80%;
+            }
+            .searchbar > input[type="search"]{
+                margin: 3px;
+                width: 100%;
+                border: none;
+                border-top-left-radius: 100px ;
+                border-bottom-left-radius: 100px;
+            }
+            .searchbar > input[type="submit"]{
+                width: 40px;
+                border: none;
+                background-color: #3f3f3f;
+                background-image: url("");
+            }
+            .mic{
+                vertical-align: middle;
+                height: 20px;
+                background-color: #c0c0c0;
+                border-radius: 100%;
+                margin-left: 5px;
+                padding: 10px;
+                filter: invert(100%);
+            }
+            .profile-controls{
+                display: flex;
+                flex-direction: row;
+
+            }
+            .icon:first-of-type{
+                filter: invert(100%);
+            }
+            .icon:second-of-type{
+                filter: brightness(100%);
+            }
+            .icon{
+                height: 35px;
+            }
+            .icon:last-of-type{
+                height: 40px;
+                border-radius: 100%;
+                border: solid 1px #3f3f3f;
+            }
+            .sidebar{
                 display: flex;
                 flex-direction:column;
                 gap: 10px;
                 list-style-type: none;
+                margin: 0;
+                margin-top: -250px;
+                padding: 0;
             }
             .suggestion>img{
                 width: 200px;
             }
             .vid-title{
+                font-size: 15px;
+                font-weight: bold;
+                padding-left: 5px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                
+            }
+            .youtuber, .views-date{
                 font-size: 10px;
-                font-weight: 2px;
+                padding-left: 5px;
             }
             .suggested-vid{
                 display: flex;
@@ -30,25 +110,58 @@
                 width: 30%;
                 color: white;
             }
+
+            
+
+
             
         </style>
     </head>
 
     <body>
-        <header><span><img style="max-width:100px" src="https://media.idownloadblog.com/wp-content/uploads/2020/08/YouTube-logo-black-background.png
-            "/></span>
+        <header>
             <span>
-                <input type="search"/>
-                <input type="submit" value="" class="search-img"/>
+                <img src="https://media.idownloadblog.com/wp-content/uploads/2020/08/YouTube-logo-black-background.png
+                "/>
             </span>
+
+            <div class="header-search">
+                <div class="searchbar">
+                        
+                    <input type="search" placeholder="Search. . ."/>
+                    <input type="submit" value="" class="search-img"/>
+
+                </div>
+                <img class="mic" src="https://webstockreview.net/images/microphone-clipart-svg-5.png">
+            </div>
+
+            <div class="profile-controls">
+                <img class="icon" src="https://icon-library.com/images/movie-png-icon/movie-png-icon-0.jpg">
+                <img class="icon" src="https://icons.veryicon.com/png/256/business/menu-icon/notifications-4.png">
+                <img class="icon" src="https://64.media.tumblr.com/821f1a7cf8af5ea6ce73271d5965a794/0c806963e6b54cef-4a/s640x960/5d2467aa3b480548fff5c4c58b44903710b548f6.jpg">
+            </div>
         </header>
-        <section>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/uq3HrjFyqcg?si=mTForZfm0FC14Uta" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        <!-- <video width="320" height="180" controls="true">
-            <source src="https://drive.google.com/file/d/1YJ_dEhSI6veQgXkvkZ6EMtcHiiXzxYLl/view?usp=sharing" type="video/mp4">
-        Your browser does not support the video tag.
-        </video> -->
+    
+    <div class="right">
+        <section >
+            <iframe src="https://www.youtube.com/embed/uq3HrjFyqcg?si=mTForZfm0FC14Uta" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <!-- <video width="320" height="180" controls="true">
+                <source src="https://drive.google.com/file/d/1YJ_dEhSI6veQgXkvkZ6EMtcHiiXzxYLl/view?usp=sharing" type="video/mp4">
+            Your browser does not support the video tag.
+            </video> -->
         </section>
+
+        <article>
+            <ol class="comments">
+                <li>Comment 1</li>
+                <li>Comment 2</li>
+                <li>Comment 3</li>
+                <li>Comment 4</li>
+                <li>Comment 5</li>
+            </ol>
+        </article>
+
+    </div>
         <aside>Sidebar where videos are
         <ol class="sidebar">
             <li class="suggested-vid">
@@ -108,15 +221,7 @@
             </li>
         </ol>
         </aside>
-        <article>
-        <ol>
-            <li>Comment 1</li>
-            <li>Comment 2</li>
-            <li>Comment 3</li>
-            <li>Comment 4</li>
-            <li>Comment 5</li>
-        </ol>
-        </article>
+
         <footer>Copyright</footer>
     </body>
 </html>
