@@ -1,24 +1,41 @@
 <!DOCTYPE html>
 <!-- 01182024 8:55- 9:55 suggested vids in aside bar -->
 <!-- 01222024 2:30 - 11:00 main body (in progress: comments, section-2, fonts) -->
-
+<!-- 01223024 9:45 - 2:30 - 4:40 - 5:10 - 7:30 - 8:20 (Done comments, redirecting search, collapsible buttons)-->
+<!-- 1 + 11(-2) + 6 = 16hours apprx -->
 <html>
     <head>
         <title>Youtube Page Replica</title>
+        <link rel="icon" type="image/x-icon" href="https://www.youtube.com/s/desktop/0b03494e/img/favicon.ico">
         <style>
-            html, body{
+
+            body{
                 background-color: black;
                 color: white;
                 height: 100%;
                 display: flex;
                 flex-direction: column;
-                margin: 0px 5%;
+                padding: 0;
+                margin: 0;
+
+            }
+
+            footer,header{
+                margin-left: 0;
+                margin-right: 0;
             }
             header{
+                width: 100%;
+                z-index: 1000;
                 display: flex;
                 flex-direction: row;
                 justify-content: space-around;
                 align-items: center;
+                background-color: black;
+                position: sticky;
+                top: 0;
+                margin:0;
+                padding: 0;
             }
             header > span > img{
                 height: 80px;
@@ -33,7 +50,7 @@
             .searchbar{
                 display: flex;
                 flex-direction: row;
-                background-color: white;
+                background: none;
                 border: solid 1px #3f3f3f;
                 border-radius: 100px;
                 overflow: hidden;
@@ -42,27 +59,35 @@
             .searchbar > input[type="search"]{
                 margin: 3px;
                 width: 100%;
+                color: white;
                 border: none;
+                outline: none;
+                background: none;
                 border-top-left-radius: 100px ;
                 border-bottom-left-radius: 100px;
             }
             .searchbar > div > input[type="submit"]{
                 width: 100%;
                 border: none;
-                background-color: #3f3f3f;
+                cursor:pointer;
+                background: url(https://openclipart.org/image/2400px/svg_to_png/213239/Search-icon.png);
+                background-size: 20px;
+                background-repeat: no-repeat;
+                background-position: 50% 50%; /*horizontal vertical*/
             }
             .searchbar > div{
                 width: 45px;
                 display: flex;
                 flex-direction: row;
+                background-color: #3f3f3f;
             }
 
-            .search-icon{
+            /* .search-icon{
                 width: 20px;
                 height: 20px;
                 margin-left: -30px;
                 margin-top: 10px;
-            }
+            } */
             .mic{
                 vertical-align: middle;
                 height: 20px;
@@ -93,9 +118,11 @@
             .main-content{ 
                 display: flex;
                 flex-direction: row;
+                justify-content: space-between;
+                padding-top: 15px;
+                margin: 0px 10%;
             }
             aside{
-                float: right;
                 width: 30%;
             }
             .sidebar{
@@ -159,31 +186,40 @@
             }
 
             iframe{
-                width: 900px;
-                height: 500px;
+                height: 475px;
                 border-radius: 15px;
             }
 
-            #level-2, #level-3, .comments{
-                width: 880px;
-
+            .main-title{
+                font-weight: 500;
+                font-size: 25px;
+                padding: 0;
+                margin: 0;
             }
-
-            #level-2{
-                width: 900px;
+            #level-2, .comments, iframe{
+                width: 100%;
             }
-
+            
             #level-2, #section-1, #section-2{
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
                 gap: 10px;
                 align-items: center;
+                padding: 5px 0px;
 
             }
-            #youtuber-infor{
+            #youtuber-info{
                 display: flex;
                 flex-direction: column;
+                justify-content: space-between;
+            }
+            #youtuber-info > p{
+                padding: 0;
+                margin: 0;
+                /* color: pink;
+                border: 1px solid pink; */
+
             }
             .main-youtuber-icon{
                 border-radius: 100%;
@@ -201,12 +237,14 @@
             }
 
             #level-3{
-                padding: 10px;
+                padding: 10px; 
                 border-radius: 15px;
                 border:solid 1px #3f3f3f;
                 background-color: #3f3f3f;
             }
-
+            #level-3{
+                width: 100%-20px;/* width:100% (takes up available space) - 20px(padding on both left and right sides)*/
+            }
             .button > img{
                 height: 30px;
             }
@@ -217,7 +255,7 @@
                 list-style-type: none;
             }
 
-            .search-icon, .mic, .icon:first-of-type, .icon:nth-child(2), .button>img, #like, #dislike{
+            .searchbar > div > input[type="submit"], .mic, .icon:first-of-type, .icon:nth-child(2), .button>img, #like, #dislike, .additional-opt > img{
                 filter: invert(100%);
             }
 
@@ -253,21 +291,131 @@
                 height: 50px;
             }
 
-            select{
+            .additional-opt > img{
+                height: 20px;
+            }
+
+            .additional-opt{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .options{
+                position: absolute;
+                left: 800px;  /* pushes the box 800px from the left */
+                bottom: 0;
+                display: none;
+                color: white;
+                background-color: #3f3f3f;
+                border-radius: 15px;
+                width: max-content;
+                padding: 0 15px;
+                box-shadow: black 3px 3px 15px 2px; /*x y blur-effect spread*/
+                
+            }
+
+            #optionsBtn{
+                color: white;
+                font-size: 25px;
                 background-color: #3f3f3f;
                 border-radius: 100px;
+                border: none;
+                align-items: center;
+            }
+            #optionsBtn > p{
+                margin-top: -10px;
+            }
 
+            #more {
+                display: none;
+            }
+
+            #dots{
+                color: #3f3f3f;
+            }
+
+            #moreBtn{
+                color: white;
+                border: none;
+                background-color: #3f3f3f;
+                margin-left: -8px;
+                font-weight: 500;
+            }
+
+            .main-desc > P{
+                /* border: solid yellow 1px; */
+                margin-bottom: 0;
+            }
+
+            article{
+                margin-right: 15px;
+            }
+
+            .comments{
+                /* border: greenyellow 1px solid; */
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                padding-bottom: 25px;
+            }
+            .comments > li > div, .new-comment{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .new-comment{
+                /* border: violet solid 1px; */
+                padding: 15px 0;
+            }
+
+            .new-comment > textarea{
+                /* border: violet solid 1px; */
+                color: white;
+                background: none;
+                width: 100%;
+                border: none;
+                border-bottom: 1px solid 0.5px;
+                outline: none;
+            }
+
+            .comments > li{
+                /* border: greenyellow 1px solid; */
+                display: flex;
+                flex-direction: column;
+            }
+            .comments > li > .comm-rate{
+                /* border: greenyellow 1px solid; */
+                margin-left: 95px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                margin-right: 600px;
+            }
+
+            /* .comment{
+                /* border: greenyellow 1px solid; */
+                /* margin-left: 100px;  } */
+            
+            .commenter{
+                height: 40px;
+                width: 40px;
+                border-radius: 100px;
+                margin: 0 25px;
+            }
+
+            
+
+            footer{
+                width: 100%;
+                text-align: center;
+                padding: 25px 0;
+                background-color: rgb(39, 12, 21);
             }
 
            
-
-
-
-
-            
-
-
-            
         </style>
     </head>
 
@@ -281,10 +429,10 @@
             <div class="header-search">
                 <div class="searchbar">
                         
-                    <input type="search" placeholder="Search. . .">
+                    <input type="search" id="yt-search" placeholder="Search. . .">
                     <div>
-                        <input type="submit" value="" class="search-img">
-                        <img class="search-icon" src="https://openclipart.org/image/2400px/svg_to_png/213239/Search-icon.png"/>    
+                        <input type="submit" onclick="search()" value=""  class="search-img">
+                        <!-- <img class="search-icon" src="https://openclipart.org/image/2400px/svg_to_png/213239/Search-icon.png"/>     -->
                     </div>
                    
                 </div>
@@ -337,14 +485,16 @@
                                 <span>Share</span>
                             </div>
                            
-                            <select class="options">
-                                <option default>...</option>
-                                <option value="Download">Download</option>
-                                <option value="Thanks">Thanks</option>
-                                <option value="Clip">Clip</option>
-                                <option value="Save">Save</option>
-                                <option value="Report">Report</option>
-                            </select>
+                            <button class="button collapsible" type="button" id="optionsBtn" onclick="activateOpt()"><p>...</p></button>
+                            <div class="options">
+                                <div class="additional-opt"><img  src="https://cdn1.iconfinder.com/data/icons/arrows-vol-1-4/24/download-512.png"/><p>Download</p></div>
+                                <div class="additional-opt"><img  src="https://webstockreview.net/images/hearts-vector-png-7.png"><p> Thanks</p></div>
+                                <div class="additional-opt"><img  src="https://www.iconpacks.net/icons/1/free-scissors-icon-981-thumb.png"><p> Clip</p></div>
+                                <div class="additional-opt"><img  src="https://cdn3.iconfinder.com/data/icons/budicon-chroma-music/24/playlist-add-512.png"><p> Save</p></div>
+                                <div class="additional-opt"><img src="https://cdn3.iconfinder.com/data/icons/user-interface-241/38/ui-11-512.png"><p> Report</p></div>
+                            </div>
+                            
+                            
                         </section>
                         
                         
@@ -356,17 +506,26 @@
                             341K views  2 years ago
                         </div>
 
+                
                         <div class="main-desc">
-                            <pre>
-Korean subtitles are now available!! Click on the CC button to see :)
-Goodies are available at doobymart.com 
-Order them now to get it before Christmas!!! 
+                            <p>Korean subtitles are now available!! Click on the CC button to see :)<br>
+                                Goodies are available at doobymart.com 
+                                <span id="dots">...</span>
+                                <p id="more">
+                                <br>
+                                Order them now to get it before Christmas!!! <br><br>
+    
+                                Instagram @doobydobap  <br>
+                                Join my discord! 😈<br>
+                                www.doobydobap.com for recipes &amp; stories<br></p>
 
-Instagram @doobydobap  
-Join my discord! 😈
-www.doobydobap.com for recipes & stories
-                            </pre>
+
+                                <button onclick="moreFunc()" id="moreBtn">...more</button>
+                            
                         </div>
+
+                        
+       
                     </div>
 
                 </div>
@@ -374,12 +533,63 @@ www.doobydobap.com for recipes & stories
             </section>
     
             <article>
+                <div class="new-comment">
+                    <img class="commenter" src="https://64.media.tumblr.com/821f1a7cf8af5ea6ce73271d5965a794/0c806963e6b54cef-4a/s640x960/5d2467aa3b480548fff5c4c58b44903710b548f6.jpg">
+                    <textarea placeholder="Add a comment..."></textarea>
+
+                </div>
                 <ol class="comments">
-                    <li>Absolutely loved the Seoul vlog! Your new beginnings seem so exciting, and I can't wait to see how you decorate your new space. The thrift store finds were amazing! 🌟</li>
-                    <li>Moving looks exhausting, but you made it so entertaining!</li>
-                    <li>Your new beginnings vlog was like a breath of fresh air! I enjoyed every moment of your moving adventure and the excitement of exploring thrift stores. Your taste in furniture is impeccable. Can't wait for more Seoul vlogs from your new chapter!</li>
-                    <li>Thrifting goals achieved! Your haul is amazing.</li>
-                    <li>Seoul just got a whole lot more stylish! Loving your new beginnings.</li>
+                    <li>
+                        <div>
+                            <img class="commenter" src="https://i.pinimg.com/originals/72/37/69/72376954787f8767d5810a90127fcf8c.jpg"/><p class="comment">Absolutely loved the Seoul vlog! Your new beginnings seem so exciting, and I can't wait to see how you decorate your new space. The thrift store finds were amazing! 🌟</p>
+                        </div>
+                        <div class="comm-rate">
+                            <img id="like" src="https://clipground.com/images/like-button-png-5.png"><span id="like-num"> 1K </span>
+                            <img id="dislike" src="https://clipground.com/images/like-button-png-5.png">
+                            <span id="reply"> reply </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <img class="commenter" src="https://wallpapercave.com/dwp1x/wp7479859.jpg"/><p class="comment">Moving looks exhausting, but you made it so entertaining!</p>
+                        </div>
+                        <div class="comm-rate">
+                            <img id="like" src="https://clipground.com/images/like-button-png-5.png">
+                            <span id="like-num"> 15 </span>
+                            <img id="dislike" src="https://clipground.com/images/like-button-png-5.png">
+                            <span id="reply"> reply </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <img class="commenter" src="https://pm1.narvii.com/7485/d516308e3566230f3ce6861387ea392ce644b340r1-1080-1069v2_hq.jpg"/><p class="comment">Your new beginnings vlog was like a breath of fresh air! I enjoyed every moment of your moving adventure and the excitement of exploring thrift stores. Your taste in furniture is impeccable. Can't wait for more Seoul vlogs from your new chapter!</p>
+                        </div>
+                        <div class="comm-rate">
+                            <img id="like" src="https://clipground.com/images/like-button-png-5.png"><span id="like-num"> 78 </span>
+                            <img id="dislike" src="https://clipground.com/images/like-button-png-5.png">
+                            <span id="reply"> reply </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div>  
+                            <img class="commenter" src="https://i.pinimg.com/originals/ca/ce/98/cace98504b0abb3f83918f9873f07161.jpg"/><p class="comment">Thrifting goals achieved! Your haul is amazing.</p>
+                        </div>
+                        <div class="comm-rate">
+                            <img id="like" src="https://clipground.com/images/like-button-png-5.png"><span id="like-num"> 45 </span>
+                            <img id="dislike" src="https://clipground.com/images/like-button-png-5.png">
+                            <span id="reply"> reply </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <img class="commenter" src="https://i.pinimg.com/originals/aa/59/f9/aa59f958a574abda4b52dc204ff114a3.jpg"/><p class="comment">Seoul just got a whole lot more stylish! Loving your new beginnings.</p>
+                        </div>
+                        <div class="comm-rate">
+                            <img id="like" src="https://clipground.com/images/like-button-png-5.png"><span id="like-num"> 253 </span>
+                            <img id="dislike" src="https://clipground.com/images/like-button-png-5.png">
+                            <span id="reply"> reply </span>
+                        </div>
+                    </li>
                 </ol>
             </article>
     
@@ -454,12 +664,117 @@ www.doobydobap.com for recipes & stories
                         </div>
                     </a>
                 </li>
+                <li>
+                    <a class="suggested-vid" href="https://www.youtube.com/watch?v=x5Pb6X0qhao">
+                        <div class="suggestion">
+                            <img src="https://i.ytimg.com/vi/x5Pb6X0qhao/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB-rkWs_-Ae9EP6uZkvN1bQoEb7YQ" />
+                        </div>
+                        <div class="suggestion">
+                            <p class="vid-title"> 🏠A collection of tips for organizing by space/ A collection of storage tips for a tidy home </p>
+                            <p class="youtuber">하루그린harugreen</p>
+                            <p class ="views-date"> 661K views  3 weeks ago </p> 
+                        </div>
+                    </a>
+                    
+                    
+                </li>
+                <li >
+                    <a class="suggested-vid" href="https://www.youtube.com/watch?v=YShty-MREvw">
+                        <div class="suggestion">
+                            <img src="https://i.ytimg.com/vi/YShty-MREvw/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB1sQvl2wsFp-T4dFshQegzo4zy8g" />
+                        </div>
+                        <div class="suggestion">
+                            <p class="vid-title"> Enjoy Ghibli at home🧺The Secret World of Arrietty🌿｜calm daily life, cooking, drawing｜Studio Ghibli </p>
+                            <p class="youtuber">toka</p>
+                            <p class ="views-date" >474K views 1 month ago</p> 
+                        </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="suggested-vid" href="https://www.youtube.com/watch?v=xsZYT7j5h2A">
+                        <div class="suggestion">
+                            <img src="https://i.ytimg.com/vi/xsZYT7j5h2A/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDYW4dwbasIrH-jaU9PwRnjF2IUAA" />
+                        </div>
+                        <div class="suggestion">
+                            <p class="vid-title"> Dreamy ART STUDIO MAKEOVER 🖼️ paint with me, house tour + thrift shopping | art vlog</p>
+                            <p class="youtuber"> Ashleigh King </p>
+                            <p class ="views-date">  55K views  4 months ago </p> 
+                        </div>
+
+                    </a>
+                    
+                    
+                </li>
+                <li>
+                    <a class="suggested-vid" href="https://www.youtube.com/watch?v=pTy-zpZXJmA">
+                        <div class="suggestion">
+                            <img src="https://i.ytimg.com/vi/pTy-zpZXJmA/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDyWfQxBApxKt6Rkf-rHys1k39kNg" />
+                        </div>
+                        <div class="suggestion">
+                            <p class="vid-title"> Getting the best out of being Alone ⭐ Klimt Museum, Watercolor Painting, Packing Prints 🫧 Art Vlog</p>
+                            <p class="youtuber">Valerie Lin </p>
+                            <p class ="views-date"> 184K views  3 months ago  </p> 
+                        </div>
+                    </a>
+                </li>
             </ol>
             </aside>
 
     </div>
     
 
-        <footer>Copyright</footer>
+        <footer>&copy; Renee Althea F. Khan - January 2024</footer>
+
+        <!-- scripts -->
+        <script>
+            function moreFunc() {
+              var dots = document.getElementById("dots");
+              var moreText = document.getElementById("more");
+              var btnText = document.getElementById("moreBtn");
+            
+              if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                btnText.innerHTML = "...more"; 
+                moreText.style.display = "none";
+              } else {
+                dots.style.display = "none";
+                btnText.innerHTML = "Show less"; 
+                moreText.style.display = "inline";
+              }
+            }
+
+            
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+
+                for (i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    if (content.style.display === "block") {
+                    content.style.display = "none";
+                    } else {
+                    content.style.display = "block";
+                    }
+                });
+                }
+
+            function search() {
+            // Get the search input element
+            var searchInput = document.getElementById("yt-search");
+
+            // Retrieve the value of the input
+            var searchText = searchInput.value;
+
+            // Construct the URL based on the fetched text
+            var searchUrl = "https://www.youtube.com/results?search_query=" + encodeURIComponent(searchText);
+
+            // Redirect to the constructed URL
+            window.location.href = searchUrl;
+
+}
+            </script>
+
     </body>
 </html>
